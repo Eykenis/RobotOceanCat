@@ -10,13 +10,13 @@ suspend fun main() {
     MiraiConsoleTerminalLoader.startAsDaemon()
 
     //如果是Kotlin
-    PluginMain.load()
-    PluginMain.enable()
-    //如果是Java
-//    JavaPluginMain.INSTANCE.load()
-//    JavaPluginMain.INSTANCE.enable()
+//    PluginMain.load()
+//    PluginMain.enable()
+//    如果是Java
+    JavaPluginMain.INSTANCE.load()
+    JavaPluginMain.INSTANCE.enable()
 
-    val bot = MiraiConsole.addBot(123456, "") {
+    val bot = MiraiConsole.addBot(208423235, "zengyike520*") {
         fileBasedDeviceInfo()
     }.alsoLogin()
 

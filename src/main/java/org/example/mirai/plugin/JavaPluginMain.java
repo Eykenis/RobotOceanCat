@@ -3,9 +3,7 @@ package org.example.mirai.plugin;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
-import net.mamoe.mirai.event.Event;
-import net.mamoe.mirai.event.EventChannel;
-import net.mamoe.mirai.event.GlobalEventChannel;
+import net.mamoe.mirai.event.*;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 
@@ -28,6 +26,9 @@ import net.mamoe.mirai.event.events.GroupMessageEvent;
 
 public final class JavaPluginMain extends JavaPlugin {
     public static final JavaPluginMain INSTANCE = new JavaPluginMain();
+
+
+
     private JavaPluginMain() {
         super(new JvmPluginDescriptionBuilder("org.example.mirai-example", "0.1.0")
                 .info("EG")
@@ -38,14 +39,6 @@ public final class JavaPluginMain extends JavaPlugin {
     public void onEnable() {
         getLogger().info("日志");
         EventChannel<Event> eventChannel = GlobalEventChannel.INSTANCE.parentScope(this);
-        eventChannel.subscribeAlways(GroupMessageEvent.class, g -> {
-            //监听群消息
-            getLogger().info(g.getMessage().contentToString());
-
-        });
-        eventChannel.subscribeAlways(FriendMessageEvent.class, f -> {
-            //监听好友消息
-            getLogger().info(f.getMessage().contentToString());
-        });
+        eventChannel.registerListenerHost(new EventHost());
     }
 }

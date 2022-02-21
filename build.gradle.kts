@@ -13,3 +13,8 @@ repositories {
     maven("https://maven.aliyun.com/repository/public") // 阿里云国内代理仓库
     mavenCentral()
 }
+
+dependencies {
+    api("net.mamoe:mirai-console-terminal:2.10.0")
+    api("net.mamoe:mirai-core:2.10.0")
+}
