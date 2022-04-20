@@ -1,11 +1,15 @@
 package org.example.mirai.plugin;
 
+import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
+import net.mamoe.mirai.contact.Contact;
+import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.event.*;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
+import net.mamoe.mirai.event.events.MessageEvent;
 
 
 /**
@@ -26,9 +30,6 @@ import net.mamoe.mirai.event.events.GroupMessageEvent;
 
 public final class JavaPluginMain extends JavaPlugin {
     public static final JavaPluginMain INSTANCE = new JavaPluginMain();
-
-
-
     private JavaPluginMain() {
         super(new JvmPluginDescriptionBuilder("org.example.mirai-example", "0.1.0")
                 .info("EG")
@@ -37,8 +38,9 @@ public final class JavaPluginMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("日志");
         EventChannel<Event> eventChannel = GlobalEventChannel.INSTANCE.parentScope(this);
         eventChannel.registerListenerHost(new EventHost());
+        EventChannel<Event> illness = GlobalEventChannel.INSTANCE.parentScope(this);
+        illness.registerListenerHost(new IllHost());
     }
 }
